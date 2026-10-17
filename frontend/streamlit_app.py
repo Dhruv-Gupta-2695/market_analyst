@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "backend"))
 import api_client
 import streamlit as st
 from app.core.logging import get_logger
-from app.tools.symbols import NIFTY50_SYMBOLS
+from app.tools.symbol_map import NIFTY50_SYMBOLS  # light module: avoids loading yfinance / the LLM client
 
 logger = get_logger(__name__)
 
