@@ -7,7 +7,9 @@ from app.core.logging import get_logger
 logger = get_logger(__name__)
 settings = get_settings()
 
-TIMEOUT = httpx.Timeout(60.0)
+# A full analysis runs several LLM calls behind a 5 requests/minute limiter (plus retries on
+# Gemini 503s) on a free-tier backend, so 60s was too short. Connect stays short to fail fast.
+TIMEOUT = httpx.Timeout(240.0, connect=30.0)
 
 
 def analyze(query: str) -> dict:
